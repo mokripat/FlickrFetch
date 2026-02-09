@@ -2,23 +2,51 @@ package cz.mokripat.flickerfetch.ui.feed
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cz.mokripat.flickerfetch.domain.model.PublicFeed
 import cz.mokripat.flickerfetch.domain.usecase.GetFeedUseCase
-import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 
 class FeedViewModel(
-    getFeedUseCase: GetFeedUseCase,
+    private val getFeedUseCase: GetFeedUseCase,
 ): ViewModel() {
-    val state : StateFlow<PublicFeed> = flow {
-        val result = getFeedUseCase()
-        if (result.isSuccess) {
-            emit(result.getOrNull()!!)
-        } else {
-            // Handle error case, e.g. emit an empty feed or a default value
-            emit(PublicFeed(title = "Error", items = emptyList()))
+
+    private val _state = MutableStateFlow(FeedState())
+    val state: StateFlow<FeedState> = _state.asStateFlow()
+
+    private val _effect = Channel<FeedEffect>(Channel.BUFFERED)
+    val effect = _effect.receiveAsFlow()
+
+    init {
+        loadFeed()
+    }
+
+    fun loadFeed() {
+        viewModelScope.launch {
+            _state.update { it.copy(isLoading = true, error = null) }
+
+            val result = getFeedUseCase()
+
+            _state.update {
+                if (result.isSuccess) {
+                    val feed = result.getOrNull()!!
+                    it.copy(
+                        isLoading = false,
+                        photos = feed.items,
+                        error = null
+                    )
+                } else {
+                    val errorMessage = result.exceptionOrNull()?.message ?: "Unknown error"
+                    it.copy(
+                        isLoading = false,
+                        error = errorMessage
+                    )
+                }
+            }
         }
-    }.stateIn(viewModelScope, SharingStarted.Lazily, PublicFeed(title = "Loading...", items = emptyList()))
+    }
 }

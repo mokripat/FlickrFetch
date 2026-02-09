@@ -1,0 +1,16 @@
+package cz.mokripat.flickerfetch.domain.usecase
+
+import cz.mokripat.flickerfetch.domain.model.PublicFeed
+import cz.mokripat.flickerfetch.domain.repository.FeedRepository
+
+interface GetFeedUseCase {
+    suspend operator fun invoke(): Result<PublicFeed>
+}
+
+class GetFeedUseCaseImpl(
+    private val repository: FeedRepository
+) : GetFeedUseCase {
+    override suspend fun invoke(): Result<PublicFeed> {
+        return repository.getPublicFeed()
+    }
+}

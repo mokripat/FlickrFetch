@@ -15,10 +15,10 @@ class FeedViewModel(
     private val getFeedUseCase: GetFeedUseCase,
 ): ViewModel() {
 
-    private val _state = MutableStateFlow(FeedState())
-    val state: StateFlow<FeedState> = _state.asStateFlow()
+    private val _state = MutableStateFlow(FeedScreenState())
+    val state: StateFlow<FeedScreenState> = _state.asStateFlow()
 
-    private val _effect = Channel<FeedEffect>(Channel.BUFFERED)
+    private val _effect = Channel<FeedScreenEffect>(Channel.BUFFERED)
     val effect = _effect.receiveAsFlow()
 
     init {

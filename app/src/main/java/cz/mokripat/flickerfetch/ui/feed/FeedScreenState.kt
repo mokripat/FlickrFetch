@@ -6,4 +6,5 @@ data class FeedScreenState(
     val isLoading: Boolean = false,
     val photos: List<PhotoItem> = emptyList(),
     val error: String? = null,
+    val searchQuery: String = ""
 )

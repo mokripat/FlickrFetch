@@ -10,5 +10,6 @@ interface PublicFeedApi {
     suspend fun getPublicFeed(
         @Query("format") format: String = "json",
         @Query("nojsoncallback") noJsonCallback: Int = 1,
+        @Query("tags") tags: String? = null,
     ): PublicFeedDto
 }

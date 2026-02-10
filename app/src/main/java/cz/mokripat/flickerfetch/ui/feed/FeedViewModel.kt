@@ -30,7 +30,9 @@ class FeedViewModel(
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
 
-            val result = getFeedUseCase()
+            // Use current tags from state for search
+            val tags = _state.value.tags.ifEmpty { null }
+            val result = getFeedUseCase(tags)
 
             _state.update {
                 if (result.isSuccess) {
@@ -72,6 +74,7 @@ class FeedViewModel(
                     searchQuery = ""
                 )
             }
+            loadFeed()
         } else if (query.isNotEmpty()) {
              // Optional: just clear query if tag exists
              _state.update { it.copy(searchQuery = "") }
@@ -82,9 +85,11 @@ class FeedViewModel(
         _state.update {
             it.copy(tags = it.tags - tag)
         }
+        loadFeed()
     }
 
     fun onClearTags() {
         _state.update { it.copy(tags = emptyList(), searchQuery = "") }
+        loadFeed()
     }
 }

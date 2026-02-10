@@ -9,9 +9,10 @@ class FeedRepositoryImpl(
     private val api: PublicFeedApi
 ) : FeedRepository {
 
-    override suspend fun getPublicFeed(): Result<PublicFeed> {
+    override suspend fun getPublicFeed(tags: List<String>?): Result<PublicFeed> {
         return try {
-            val dto = api.getPublicFeed()
+            val tagsString = tags?.joinToString(separator = ",")
+            val dto = api.getPublicFeed(tags = tagsString)
             val domain = dto.toDomain()
             Result.success(domain)
         } catch (e: Exception) {

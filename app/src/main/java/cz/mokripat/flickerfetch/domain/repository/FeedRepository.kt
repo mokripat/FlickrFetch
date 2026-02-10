@@ -4,5 +4,5 @@ import cz.mokripat.flickerfetch.domain.model.PublicFeed
 
 interface FeedRepository {
 
-    suspend fun getPublicFeed(): Result<PublicFeed>
+    suspend fun getPublicFeed(tags: List<String>? = null): Result<PublicFeed>
 }

@@ -26,7 +26,7 @@ fun FeedScreen(
             contentAlignment = Alignment.Center
         ) {
             when {
-                state.isLoading -> {
+                state.isLoading && state.photos.isEmpty() -> {
                     CircularProgressIndicator()
                 }
 
@@ -49,7 +49,8 @@ fun FeedScreen(
                             bottom = innerPadding.calculateBottomPadding(),
                             start = 16.dp,
                             end = 16.dp,
-                        )
+                        ),
+                        onRefresh = { viewModel.loadFeed() }
                     )
                 }
             }

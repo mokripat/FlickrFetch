@@ -79,7 +79,14 @@ fun FeedScreenContent(
                 }
                 state.photos.isEmpty() -> {
                      Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "No photos available")
+                        Text(
+                            text = if (state.tags.isEmpty()) {
+                                "No photos available \uD83D\uDE31"
+                            } else {
+                                "No photos matching current tags \uD83D\uDE35"
+                            }
+
+                        )
                     }
                 }
                 else -> {

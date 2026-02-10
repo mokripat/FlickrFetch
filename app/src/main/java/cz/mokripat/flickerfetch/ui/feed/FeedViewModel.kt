@@ -58,4 +58,33 @@ class FeedViewModel(
     fun closeDetail() {
         _state.update { it.copy(selectedPhoto = null) }
     }
+
+    fun onSearchQueryChange(query: String) {
+        _state.update { it.copy(searchQuery = query) }
+    }
+
+    fun onAddTag() {
+        val query = _state.value.searchQuery.trim()
+        if (query.isNotEmpty() && !_state.value.tags.contains(query)) {
+            _state.update {
+                it.copy(
+                    tags = it.tags + query,
+                    searchQuery = ""
+                )
+            }
+        } else if (query.isNotEmpty()) {
+             // Optional: just clear query if tag exists
+             _state.update { it.copy(searchQuery = "") }
+        }
+    }
+
+    fun onRemoveTag(tag: String) {
+        _state.update {
+            it.copy(tags = it.tags - tag)
+        }
+    }
+
+    fun onClearTags() {
+        _state.update { it.copy(tags = emptyList(), searchQuery = "") }
+    }
 }

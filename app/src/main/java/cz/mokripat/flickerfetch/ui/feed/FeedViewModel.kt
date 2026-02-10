@@ -3,6 +3,7 @@ package cz.mokripat.flickerfetch.ui.feed
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cz.mokripat.flickerfetch.domain.usecase.GetFeedUseCase
+import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -48,5 +49,13 @@ class FeedViewModel(
                 }
             }
         }
+    }
+
+    fun selectPhoto(photo: PhotoItem) {
+        _state.update { it.copy(selectedPhoto = photo) }
+    }
+
+    fun closeDetail() {
+        _state.update { it.copy(selectedPhoto = null) }
     }
 }

@@ -11,6 +11,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,6 +19,7 @@ fun FeedScreenContent(
     state: FeedScreenState,
     contentPaddingValues: PaddingValues,
     onRefresh: () -> Unit,
+    onPhotoClick: (PhotoItem) -> Unit,
 ) {
     PullToRefreshBox(
         isRefreshing = state.isLoading,
@@ -32,7 +34,10 @@ fun FeedScreenContent(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(state.photos) { photo ->
-                PhotoItemCard(photo = photo)
+                PhotoItemCard(
+                    photo = photo,
+                    onClick = { onPhotoClick(photo) }
+                )
             }
         }
     }

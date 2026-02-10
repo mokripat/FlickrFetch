@@ -20,40 +20,50 @@ fun FeedScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            when {
-                state.isLoading && state.photos.isEmpty() -> {
-                    CircularProgressIndicator()
-                }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                when {
+                    state.isLoading && state.photos.isEmpty() -> {
+                        CircularProgressIndicator()
+                    }
 
-                state.error != null -> {
-                    Text(
-                        text = "Error: ${state.error}",
-                        color = MaterialTheme.colorScheme.error
-                    )
-                }
+                    state.error != null -> {
+                        Text(
+                            text = "Error: ${state.error}",
+                            color = MaterialTheme.colorScheme.error
+                        )
+                    }
 
-                state.photos.isEmpty() -> {
-                    Text(text = "No photos available")
-                }
+                    state.photos.isEmpty() -> {
+                        Text(text = "No photos available")
+                    }
 
-                else -> {
-                    FeedScreenContent(
-                        state = state,
-                        contentPaddingValues = PaddingValues(
-                            top = innerPadding.calculateTopPadding(),
-                            bottom = innerPadding.calculateBottomPadding(),
-                            start = 16.dp,
-                            end = 16.dp,
-                        ),
-                        onRefresh = { viewModel.loadFeed() }
-                    )
+                    else -> {
+                        FeedScreenContent(
+                            state = state,
+                            contentPaddingValues = PaddingValues(
+                                top = innerPadding.calculateTopPadding(),
+                                bottom = innerPadding.calculateBottomPadding(),
+                                start = 16.dp,
+                                end = 16.dp,
+                            ),
+                            onRefresh = { viewModel.loadFeed() },
+                            onPhotoClick = { viewModel.selectPhoto(it) }
+                        )
+                    }
                 }
             }
+        }
+
+        if (state.selectedPhoto != null) {
+            ImageFullscreenDetail(
+                photo = state.selectedPhoto!!,
+                onBack = { viewModel.closeDetail() }
+            )
         }
     }
 }

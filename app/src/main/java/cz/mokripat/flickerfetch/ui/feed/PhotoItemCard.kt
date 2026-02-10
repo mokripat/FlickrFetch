@@ -22,8 +22,12 @@ import coil3.compose.AsyncImage
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @Composable
-fun PhotoItemCard(photo: PhotoItem) {
+fun PhotoItemCard(
+    photo: PhotoItem,
+    onClick: () -> Unit,
+) {
     Card(
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .aspectRatio(1f)
@@ -76,7 +80,8 @@ private fun PhotoItemCardPreview() {
                 dateTaken = "2026-02-10T15:30:00Z",
                 author = "John Doe",
                 tags = listOf("sunset", "mountains", "nature")
-            )
+            ),
+            onClick = {}
         )
     }
 }

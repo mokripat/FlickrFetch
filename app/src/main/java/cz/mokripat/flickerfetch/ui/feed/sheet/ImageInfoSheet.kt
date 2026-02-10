@@ -1,4 +1,4 @@
-package cz.mokripat.flickerfetch.ui.feed
+package cz.mokripat.flickerfetch.ui.feed.sheet
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

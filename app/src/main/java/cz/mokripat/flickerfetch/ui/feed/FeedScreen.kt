@@ -18,6 +18,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

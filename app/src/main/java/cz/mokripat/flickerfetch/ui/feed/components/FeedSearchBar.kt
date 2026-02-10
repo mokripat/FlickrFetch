@@ -1,4 +1,4 @@
-package cz.mokripat.flickerfetch.ui.feed
+package cz.mokripat.flickerfetch.ui.feed.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable

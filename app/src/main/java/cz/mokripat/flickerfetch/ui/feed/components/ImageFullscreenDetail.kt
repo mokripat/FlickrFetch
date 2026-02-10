@@ -1,4 +1,4 @@
-package cz.mokripat.flickerfetch.ui.feed
+package cz.mokripat.flickerfetch.ui.feed.components
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Box
@@ -25,6 +25,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import coil3.compose.AsyncImage
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
+import cz.mokripat.flickerfetch.ui.feed.sheet.ImageInfoSheet
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

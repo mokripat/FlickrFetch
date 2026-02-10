@@ -24,6 +24,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
+import cz.mokripat.flickerfetch.ui.feed.components.FeedSearchBar
+import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

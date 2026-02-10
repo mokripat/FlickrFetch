@@ -5,45 +5,30 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageInfoSheet(
-    photo: PhotoItem,
-    onDismissRequest: () -> Unit
+fun ImageInfoContent(
+    photo: PhotoItem
 ) {
-    val sheetState = rememberModalBottomSheetState()
-
-    ModalBottomSheet(
-        onDismissRequest = onDismissRequest,
-        sheetState = sheetState
-    ) {
-        InfoContent(photo = photo)
-    }
-}
-
-@Composable
-private fun InfoContent(photo: PhotoItem) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .padding(bottom = 32.dp)
+            .padding(horizontal = 16.dp)
+            .padding(bottom = 32.dp, top = 8.dp)
     ) {
+        val title = photo.title.ifBlank { "Image has no title 🥺" }
         Text(
-            text = photo.title,
+            text = title,
             style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold
+            fontWeight = FontWeight.Bold,
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(16.dp))

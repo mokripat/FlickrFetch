@@ -63,9 +63,10 @@ fun FeedScreen(
             )
         }
 
-        if (state.selectedPhoto != null) {
+        val selectedPhoto = state.selectedPhoto
+        if (selectedPhoto != null) {
             ImageFullscreenDetail(
-                photo = state.selectedPhoto!!,
+                photo = selectedPhoto,
                 onBack = { viewModel.closeDetail() }
             )
         }

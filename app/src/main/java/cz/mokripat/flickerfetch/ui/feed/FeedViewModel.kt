@@ -140,6 +140,10 @@ internal class FeedViewModel(
      * Clears all tags and the search query, then reloads the feed.
      */
     fun onClearTags() {
+        if (_state.value.tags.isEmpty()) {
+            return
+        }
+
         _state.update { it.copy(tags = emptyList(), searchQuery = "") }
         loadFeed()
     }

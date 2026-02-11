@@ -21,9 +21,16 @@ internal class FeedViewModel(
 ): ViewModel() {
 
     private val _state = MutableStateFlow(FeedScreenState())
+    private val _effect = Channel<FeedScreenEffect>(Channel.BUFFERED)
+
+    /**
+     * StateFlow representing the current state of the feed screen, observed by the UI.
+     */
     val state: StateFlow<FeedScreenState> = _state.asStateFlow()
 
-    private val _effect = Channel<FeedScreenEffect>(Channel.BUFFERED)
+    /**
+     * Flow of one-time effects emitted by the ViewModel, such as showing error messages, observed by the UI.
+     */
     val effect = _effect.receiveAsFlow()
 
     init {
@@ -32,6 +39,8 @@ internal class FeedViewModel(
 
     /**
      * Loads the photo feed, optionally using the current tags.
+     *
+     * @param isPullRefresh Whether this load was triggered by a pull-to-refresh action, to show appropriate loading state.
      */
     fun loadFeed(isPullRefresh: Boolean = false) {
         viewModelScope.launch {
@@ -73,6 +82,8 @@ internal class FeedViewModel(
 
     /**
      * Selects a photo to show in detail view.
+     *
+     * @param photo The photo item to select.
      */
     fun selectPhoto(photo: PhotoItem) {
         _state.update { it.copy(selectedPhoto = photo) }
@@ -87,6 +98,8 @@ internal class FeedViewModel(
 
     /**
      * Updates the search query text.
+     *
+     * @param query The new search query text.
      */
     fun onSearchQueryChange(query: String) {
         _state.update { it.copy(searchQuery = query) }
@@ -113,6 +126,8 @@ internal class FeedViewModel(
 
     /**
      * Removes a tag and reloads the feed.
+     *
+     * @param tag The tag to remove.
      */
     fun onRemoveTag(tag: String) {
         _state.update {

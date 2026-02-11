@@ -3,6 +3,7 @@ package cz.mokripat.flickerfetch.ui.feed
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
@@ -10,7 +11,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,8 +20,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
 
@@ -100,7 +103,16 @@ private fun FeedTopAppBar(
     onSearchToggle: () -> Unit
 ) {
     TopAppBar(
-        title = { Text(if (isSearchVisible) stringResource(R.string.feed_screen_title_search) else stringResource(R.string.feed_screen_title_feed)) },
+        title = {
+            Icon(
+                painterResource(
+                    if (isSearchVisible) R.drawable.ic_search_title else R.drawable.ic_feed_title
+                ),
+                tint = Color.Unspecified,
+                modifier = Modifier.height(24.dp),
+                contentDescription = null
+            )
+        },
         actions = {
             IconButton(onClick = onSearchToggle) {
                 if (isSearchVisible) {

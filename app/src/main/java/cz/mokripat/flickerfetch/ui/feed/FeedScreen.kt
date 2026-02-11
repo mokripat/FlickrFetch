@@ -18,6 +18,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +35,7 @@ fun FeedScreen(
             modifier = Modifier.fillMaxSize(),
             topBar = {
                 TopAppBar(
-                    title = { Text(if (isSearchVisible) "Search" else "Feed") },
+                    title = { Text(if (isSearchVisible) stringResource(R.string.feed_screen_title_search) else stringResource(R.string.feed_screen_title_feed)) },
                     actions = {
                         IconButton(onClick = {
                             if (isSearchVisible) {
@@ -42,9 +44,9 @@ fun FeedScreen(
                             isSearchVisible = !isSearchVisible
                         }) {
                             if (isSearchVisible) {
-                                Icon(Icons.Default.Close, contentDescription = "Close Search")
+                                Icon(Icons.Default.Close, contentDescription = stringResource(R.string.feed_screen_content_description_close_search))
                             } else {
-                                Icon(Icons.Default.Search, contentDescription = "Search")
+                                Icon(Icons.Default.Search, contentDescription = stringResource(R.string.feed_screen_content_description_search))
                             }
                         }
                     }

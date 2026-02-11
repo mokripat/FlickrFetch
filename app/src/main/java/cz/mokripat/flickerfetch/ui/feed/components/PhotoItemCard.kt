@@ -15,9 +15,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @Composable
@@ -39,7 +40,7 @@ fun PhotoItemCard(
                 contentDescription = photo.title,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Crop,
-                loadingIndicatorSize = 24.dp
+                loadingIndicatorSize = dimensionResource(R.dimen.photo_item_card_loading_indicator_size)
             )
 
             Box(
@@ -54,7 +55,7 @@ fun PhotoItemCard(
                             )
                         )
                     )
-                    .padding(12.dp)
+                    .padding(dimensionResource(R.dimen.photo_item_card_text_padding))
             ) {
                 Text(
                     text = photo.title,

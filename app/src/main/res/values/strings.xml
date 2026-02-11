@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">FlickerFetch</string>
+
+    <string name="feed_screen_title_search">Search</string>
+    <string name="feed_screen_title_feed">Feed</string>
+    <string name="feed_screen_content_description_close_search">Close Search</string>
+    <string name="feed_screen_content_description_search">Search</string>
+
+    <string name="feed_screen_content_error_prefix">Error: %1$s</string>
+    <string name="feed_screen_content_no_photos">No photos available \uD83D\uDE31</string>
+    <string name="feed_screen_content_no_photos_matching_tags">No photos matching current tags \uD83D\uDE35</string>
+
+    <string name="feed_search_bar_placeholder">Search tags</string>
+    <string name="feed_search_bar_remove_tag_content_description">Remove tag</string>
+
+    <string name="image_fullscreen_detail_close_button_content_description">Close</string>
+    <string name="image_fullscreen_detail_info_button_text">Info</string>
+
+    <string name="image_info_sheet_no_title">Image has no title 🥺</string>
+    <string name="image_info_sheet_label_author">Author</string>
+    <string name="image_info_sheet_label_date_taken">Date Taken</string>
+    <string name="image_info_sheet_label_tags">Tags</string>
+    <string name="image_info_sheet_no_tags">No tags</string>
 </resources>

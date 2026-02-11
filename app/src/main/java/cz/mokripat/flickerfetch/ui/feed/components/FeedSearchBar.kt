@@ -21,9 +21,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import cz.mokripat.flickerfetch.R
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -38,13 +40,14 @@ fun FeedSearchBar(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp).padding(bottom = 8.dp)
+            .padding(horizontal = dimensionResource(R.dimen.feed_search_bar_horizontal_padding))
+            .padding(bottom = dimensionResource(R.dimen.feed_search_bar_bottom_padding))
     ) {
         OutlinedTextField(
             value = query,
             onValueChange = onQueryChange,
             modifier = Modifier.fillMaxWidth(),
-            placeholder = { Text("Search tags") },
+            placeholder = { Text(stringResource(R.string.feed_search_bar_placeholder)) },
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             singleLine = true,
             shape = CircleShape,
@@ -58,8 +61,8 @@ fun FeedSearchBar(
             FlowRow(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 8.dp),
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                    .padding(top = dimensionResource(R.dimen.feed_search_bar_tags_top_padding)),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.feed_search_bar_tags_spacing)),
             ) {
                 tags.forEach { tag ->
                     InputChip(
@@ -70,9 +73,9 @@ fun FeedSearchBar(
                         trailingIcon = {
                             Icon(
                                 Icons.Default.Close,
-                                contentDescription = "Remove tag",
+                                contentDescription = stringResource(R.string.feed_search_bar_remove_tag_content_description),
                                 modifier = Modifier
-                                    .padding(start = 4.dp)
+                                    .padding(start = dimensionResource(R.dimen.feed_search_bar_remove_tag_icon_padding))
                                     .clickable { onRemoveTag(tag) }
                             )
                         }
@@ -96,4 +99,3 @@ private fun FeedSearchBarPreview() {
         )
     }
 }
-

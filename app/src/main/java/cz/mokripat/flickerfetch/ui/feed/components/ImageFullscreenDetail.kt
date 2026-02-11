@@ -30,8 +30,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.ui.feed.sheet.ImageInfoContent
 import kotlinx.coroutines.launch
@@ -60,7 +62,7 @@ fun ImageFullscreenDetail(
                 photo = photo
             )
         },
-        sheetPeekHeight = 0.dp,
+        sheetPeekHeight = dimensionResource(R.dimen.image_fullscreen_detail_sheet_peek_height),
         sheetContainerColor = MaterialTheme.colorScheme.surface,
         containerColor = Color.Transparent,
     ) { paddingValues ->
@@ -86,7 +88,7 @@ fun ImageFullscreenDetail(
                 contentDescription = photo.title,
                 modifier = Modifier.fillMaxSize(),
                 contentScale = ContentScale.Fit,
-                loadingIndicatorSize = 64.dp
+                loadingIndicatorSize = dimensionResource(R.dimen.image_fullscreen_detail_loading_indicator_size)
             )
 
             // Close Button
@@ -95,7 +97,7 @@ fun ImageFullscreenDetail(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .statusBarsPadding()
-                    .padding(16.dp)
+                    .padding(dimensionResource(R.dimen.image_fullscreen_detail_close_button_padding))
                     .background(
                         color = Color.Black.copy(alpha = 0.4f),
                         shape = CircleShape
@@ -103,7 +105,7 @@ fun ImageFullscreenDetail(
             ) {
                 Icon(
                     imageVector = Icons.Default.Close,
-                    contentDescription = "Close",
+                    contentDescription = stringResource(R.string.image_fullscreen_detail_close_button_content_description),
                     tint = Color.White
                 )
             }
@@ -117,7 +119,7 @@ fun ImageFullscreenDetail(
                 },
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
-                    .padding(16.dp)
+                    .padding(dimensionResource(R.dimen.image_fullscreen_detail_info_button_padding))
                     .navigationBarsPadding(),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.8f),
@@ -127,9 +129,9 @@ fun ImageFullscreenDetail(
                 Icon(
                     imageVector = Icons.Default.Info,
                     contentDescription = null,
-                    modifier = Modifier.padding(end = 8.dp)
+                    modifier = Modifier.padding(end = dimensionResource(R.dimen.image_fullscreen_detail_info_icon_padding))
                 )
-                Text("Info")
+                Text(stringResource(R.string.image_fullscreen_detail_info_button_text))
             }
         }
     }

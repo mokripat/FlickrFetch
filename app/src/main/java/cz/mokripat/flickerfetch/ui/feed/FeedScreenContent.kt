@@ -22,7 +22,9 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.ui.feed.components.FeedSearchBar
 import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
@@ -72,7 +74,7 @@ fun FeedScreenContent(
                 state.error != null -> {
                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Text(
-                            text = "Error: ${state.error}",
+                            text = stringResource(R.string.feed_screen_content_error_prefix, state.error),
                             color = MaterialTheme.colorScheme.error
                         )
                     }
@@ -81,9 +83,9 @@ fun FeedScreenContent(
                      Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                         Text(
                             text = if (state.tags.isEmpty()) {
-                                "No photos available \uD83D\uDE31"
+                                stringResource(R.string.feed_screen_content_no_photos)
                             } else {
-                                "No photos matching current tags \uD83D\uDE35"
+                                stringResource(R.string.feed_screen_content_no_photos_matching_tags)
                             }
 
                         )
@@ -95,11 +97,11 @@ fun FeedScreenContent(
                         modifier = Modifier.fillMaxSize(),
                         contentPadding = PaddingValues(
                             bottom = contentPaddingValues.calculateBottomPadding(),
-                            start = 8.dp,
-                            end = 8.dp
+                            start = dimensionResource(R.dimen.feed_screen_content_grid_spacing),
+                            end = dimensionResource(R.dimen.feed_screen_content_grid_spacing)
                         ),
-                        horizontalArrangement = Arrangement.spacedBy(8.dp),
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.feed_screen_content_grid_spacing)),
+                        verticalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.feed_screen_content_grid_spacing))
                     ) {
                         items(state.photos) { photo ->
                             PhotoItemCard(

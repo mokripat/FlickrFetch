@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import cz.mokripat.flickerfetch.R
 
@@ -78,7 +79,7 @@ internal fun FeedSearchBar(
                     InputChip(
                         selected = false,
                         onClick = { },
-                        label = { Text(tag) },
+                        label = { Text(tag, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                         shape = CircleShape,
                         trailingIcon = {
                             Icon(

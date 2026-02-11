@@ -1,5 +1,6 @@
 package cz.mokripat.flickerfetch.data.mapper
 
+import cz.mokripat.flickerfetch.common.DateFormatUtils
 import cz.mokripat.flickerfetch.data.api.dto.PhotoItemDto
 import cz.mokripat.flickerfetch.data.api.dto.PublicFeedDto
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
@@ -25,7 +26,7 @@ private fun PhotoItemDto.toDomain(): PhotoItem {
         link = link,
         thumbnailUrl = media.m,
         photoUrl = media.m.replace("_m.", "_b."),
-        dateTaken = dateTaken,
+        dateTaken = DateFormatUtils.formatDate(dateTaken),
         author = author.extractAuthorName(),
         tags = tags.split(" ").filter { it.isNotBlank() }
     )

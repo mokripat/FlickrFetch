@@ -82,39 +82,13 @@ internal fun FeedScreenContent(
         ) {
             when {
                 state.isLoading && state.photos.isEmpty() -> {
-                    Box(
-                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        CircularProgressIndicator()
-                    }
+                    FullscreenLoading()
                 }
                 state.error != null -> {
-                    Box(
-                        modifier = Modifier
-                            .fillMaxSize()
-                            .verticalScroll(rememberScrollState())
-                            .padding(vertical = dimensionResource(R.dimen.feed_screen_error_horizontal_spacing)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Text(
-                            text = stringResource(R.string.feed_screen_content_error_prefix, state.error),
-                            color = MaterialTheme.colorScheme.error,
-                            textAlign = TextAlign.Center,
-                        )
-                    }
+                    ErrorMessage(error = state.error)
                 }
                 state.photos.isEmpty() -> {
-                     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(
-                            text = if (state.tags.isEmpty()) {
-                                stringResource(R.string.feed_screen_content_no_photos)
-                            } else {
-                                stringResource(R.string.feed_screen_content_no_photos_matching_tags)
-                            }
-
-                        )
-                    }
+                    EmptyStateMessage(hasTags = state.tags.isNotEmpty())
                 }
                 else -> {
                     LazyVerticalGrid(
@@ -138,5 +112,53 @@ internal fun FeedScreenContent(
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun FullscreenLoading() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        contentAlignment = Alignment.Center
+    ) {
+        CircularProgressIndicator()
+    }
+}
+
+@Composable
+private fun ErrorMessage(error: String) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .padding(vertical = dimensionResource(R.dimen.feed_screen_error_horizontal_spacing)),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = stringResource(R.string.feed_screen_content_error_prefix, error),
+            color = MaterialTheme.colorScheme.error,
+            textAlign = TextAlign.Center,
+        )
+    }
+}
+
+@Composable
+private fun EmptyStateMessage(hasTags: Boolean) {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState()),
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = if (!hasTags) {
+                stringResource(R.string.feed_screen_content_no_photos)
+            } else {
+                stringResource(R.string.feed_screen_content_no_photos_matching_tags)
+            }
+
+        )
     }
 }

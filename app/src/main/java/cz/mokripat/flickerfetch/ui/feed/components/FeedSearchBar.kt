@@ -27,6 +27,16 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import cz.mokripat.flickerfetch.R
 
+/**
+ * Search bar component with support for tags.
+ *
+ * @param query Current search query text.
+ * @param tags List of active tags.
+ * @param onQueryChange Callback when query changes.
+ * @param onAddTag Callback to add the current query as a tag.
+ * @param onRemoveTag Callback to remove a specific tag.
+ * @param modifier Component modifier.
+ */
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 internal fun FeedSearchBar(

@@ -16,6 +16,15 @@ import androidx.compose.ui.unit.Dp
 import coil3.compose.SubcomposeAsyncImage
 import cz.mokripat.flickerfetch.R
 
+/**
+ * A wrapper around AsyncImage that handles loading indicators and error states.
+ *
+ * @param model The image model (URL, drawable, etc.).
+ * @param contentDescription Content description for accessibility.
+ * @param modifier Modifier for the image.
+ * @param contentScale Content scale for the image.
+ * @param loadingIndicatorSize Size of the circular loading indicator.
+ */
 @Composable
 internal fun FlickerAsyncImage(
     model: Any?,

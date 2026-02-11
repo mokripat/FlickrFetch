@@ -16,6 +16,11 @@ import androidx.compose.ui.text.font.FontWeight
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
+/**
+ * Content for the bottom sheet displaying photo details.
+ *
+ * @param photo The photo item data.
+ */
 @Composable
 internal fun ImageInfoContent(
     photo: PhotoItem

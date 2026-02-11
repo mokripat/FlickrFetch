@@ -8,6 +8,9 @@ import cz.mokripat.flickerfetch.ui.feed.FeedScreen
 import cz.mokripat.flickerfetch.ui.theme.FlickerFetchTheme
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 
+/**
+ * Main activity of FlickerFetch app.
+ */
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

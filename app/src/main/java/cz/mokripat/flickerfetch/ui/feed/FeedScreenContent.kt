@@ -29,6 +29,18 @@ import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.ui.feed.components.FeedSearchBar
 import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
 
+/**
+ * Content of the FeedScreen, displaying the search bar and the list of photos.
+ *
+ * @param state Current state of the screen.
+ * @param contentPaddingValues Padding values from the scaffold.
+ * @param isSearchVisible Whether the search bar is visible.
+ * @param onRefresh Callback to refresh the feed.
+ * @param onPhotoClick Callback when a photo is clicked.
+ * @param onSearchQueryChange Callback when search query changes.
+ * @param onAddTag Callback to add a tag.
+ * @param onRemoveTag Callback to remove a tag.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun FeedScreenContent(

@@ -22,6 +22,11 @@ import androidx.compose.ui.res.stringResource
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
 
+/**
+ * Screen to display the feed of photos with search functionality and photo details.
+ *
+ * @param viewModel The ViewModel that holds the state and logic for this screen.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FeedScreen(

@@ -12,6 +12,10 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel for the FeedScreen.
+ * Manages state and interacts with [GetFeedUseCase].
+ */
 internal class FeedViewModel(
     private val getFeedUseCase: GetFeedUseCase,
 ): ViewModel() {
@@ -26,6 +30,9 @@ internal class FeedViewModel(
         loadFeed()
     }
 
+    /**
+     * Loads the photo feed, optionally using the current tags.
+     */
     fun loadFeed() {
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true, error = null) }
@@ -53,18 +60,30 @@ internal class FeedViewModel(
         }
     }
 
+    /**
+     * Selects a photo to show in detail view.
+     */
     fun selectPhoto(photo: PhotoItem) {
         _state.update { it.copy(selectedPhoto = photo) }
     }
 
+    /**
+     * Closes the detail view.
+     */
     fun closeDetail() {
         _state.update { it.copy(selectedPhoto = null) }
     }
 
+    /**
+     * Updates the search query text.
+     */
     fun onSearchQueryChange(query: String) {
         _state.update { it.copy(searchQuery = query) }
     }
 
+    /**
+     * Adds the current search query as a tag and reloads the feed.
+     */
     fun onAddTag() {
         val query = _state.value.searchQuery.trim()
         if (query.isNotEmpty() && !_state.value.tags.contains(query)) {
@@ -81,6 +100,9 @@ internal class FeedViewModel(
         }
     }
 
+    /**
+     * Removes a tag and reloads the feed.
+     */
     fun onRemoveTag(tag: String) {
         _state.update {
             it.copy(tags = it.tags - tag)
@@ -88,6 +110,9 @@ internal class FeedViewModel(
         loadFeed()
     }
 
+    /**
+     * Clears all tags and the search query, then reloads the feed.
+     */
     fun onClearTags() {
         _state.update { it.copy(tags = emptyList(), searchQuery = "") }
         loadFeed()

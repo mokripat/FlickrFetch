@@ -39,6 +39,13 @@ import cz.mokripat.flickerfetch.ui.feed.sheet.ImageInfoContent
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.shape.CircleShape
 
+/**
+ * Fullscreen detail view for a photo.
+ * Features a bottom sheet for extra information.
+ *
+ * @param photo The photo item to display.
+ * @param onBack Callback when back/close is requested.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ImageFullscreenDetail(

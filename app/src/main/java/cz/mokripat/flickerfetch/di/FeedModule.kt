@@ -8,6 +8,9 @@ import cz.mokripat.flickerfetch.ui.feed.FeedViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * DI module for Feed feature dependencies.
+ */
 val feedModule = module {
     single<FeedRepository> { FeedRepositoryImpl(get()) }
 

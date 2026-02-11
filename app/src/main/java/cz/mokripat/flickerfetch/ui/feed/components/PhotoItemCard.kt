@@ -21,6 +21,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
+/**
+ * Card component for displaying a single photo item in the grid.
+ *
+ * @param photo The photo item data.
+ * @param onClick Callback when the card is clicked.
+ */
 @Composable
 internal fun PhotoItemCard(
     photo: PhotoItem,

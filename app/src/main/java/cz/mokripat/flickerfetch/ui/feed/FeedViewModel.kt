@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class FeedViewModel(
+internal class FeedViewModel(
     private val getFeedUseCase: GetFeedUseCase,
 ): ViewModel() {
 

@@ -41,7 +41,7 @@ import androidx.compose.foundation.shape.CircleShape
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ImageFullscreenDetail(
+internal fun ImageFullscreenDetail(
     photo: PhotoItem,
     onBack: () -> Unit,
 ) {

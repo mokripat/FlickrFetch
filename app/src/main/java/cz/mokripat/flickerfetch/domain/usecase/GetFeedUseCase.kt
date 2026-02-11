@@ -7,7 +7,7 @@ interface GetFeedUseCase {
     suspend operator fun invoke(tags: List<String>? = null): Result<PublicFeed>
 }
 
-class GetFeedUseCaseImpl(
+internal class GetFeedUseCaseImpl(
     private val repository: FeedRepository
 ) : GetFeedUseCase {
     override suspend fun invoke(tags: List<String>?): Result<PublicFeed> {

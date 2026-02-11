@@ -17,7 +17,7 @@ import coil3.compose.SubcomposeAsyncImage
 import cz.mokripat.flickerfetch.R
 
 @Composable
-fun FlickerAsyncImage(
+internal fun FlickerAsyncImage(
     model: Any?,
     contentDescription: String?,
     modifier: Modifier = Modifier,

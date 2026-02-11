@@ -22,7 +22,7 @@ import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @Composable
-fun PhotoItemCard(
+internal fun PhotoItemCard(
     photo: PhotoItem,
     onClick: () -> Unit,
 ) {

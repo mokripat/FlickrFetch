@@ -29,7 +29,7 @@ import cz.mokripat.flickerfetch.R
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun FeedSearchBar(
+internal fun FeedSearchBar(
     query: String,
     tags: List<String>,
     onQueryChange: (String) -> Unit,

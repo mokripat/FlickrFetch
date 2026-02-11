@@ -5,7 +5,7 @@ import cz.mokripat.flickerfetch.data.mapper.toDomain
 import cz.mokripat.flickerfetch.domain.model.PublicFeed
 import cz.mokripat.flickerfetch.domain.repository.FeedRepository
 
-class FeedRepositoryImpl(
+internal class FeedRepositoryImpl(
     private val api: PublicFeedApi
 ) : FeedRepository {
 

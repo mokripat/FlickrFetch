@@ -4,7 +4,7 @@ import cz.mokripat.flickerfetch.data.api.dto.PublicFeedDto
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface PublicFeedApi {
+internal interface PublicFeedApi {
 
     @GET("services/feeds/photos_public.gne")
     suspend fun getPublicFeed(

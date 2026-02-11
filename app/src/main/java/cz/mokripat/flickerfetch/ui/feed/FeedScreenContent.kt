@@ -31,7 +31,7 @@ import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FeedScreenContent(
+internal fun FeedScreenContent(
     state: FeedScreenState,
     contentPaddingValues: PaddingValues,
     isSearchVisible: Boolean,

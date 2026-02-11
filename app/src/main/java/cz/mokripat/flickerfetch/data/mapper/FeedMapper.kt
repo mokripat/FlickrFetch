@@ -5,7 +5,7 @@ import cz.mokripat.flickerfetch.data.api.dto.PublicFeedDto
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.domain.model.PublicFeed
 
-fun PublicFeedDto.toDomain(): PublicFeed {
+internal fun PublicFeedDto.toDomain(): PublicFeed {
     return PublicFeed(
         title = title,
         items = items.map { it.toDomain() }

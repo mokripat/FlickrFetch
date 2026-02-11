@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class PhotoItemDto(
+internal data class PhotoItemDto(
     val title: String,
     val link: String,
     val media: MediaDto,

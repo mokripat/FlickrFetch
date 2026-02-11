@@ -17,7 +17,7 @@ import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @Composable
-fun ImageInfoContent(
+internal fun ImageInfoContent(
     photo: PhotoItem
 ) {
     Column(

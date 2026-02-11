@@ -16,7 +16,8 @@ private fun PhotoItemDto.toDomain(): PhotoItem {
     return PhotoItem(
         title = title,
         link = link,
-        imageUrl = media.m,
+        thumbnailUrl = media.m,
+        photoUrl = media.m.replace("_m.", "_b."),
         dateTaken = dateTaken,
         author = author.extractAuthorName(),
         tags = tags.split(" ").filter { it.isNotBlank() }

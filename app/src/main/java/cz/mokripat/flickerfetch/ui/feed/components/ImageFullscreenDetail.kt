@@ -32,7 +32,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.ui.feed.sheet.ImageInfoContent
 import kotlinx.coroutines.launch
@@ -80,13 +79,14 @@ fun ImageFullscreenDetail(
                         }
                     }
                 )
-                .padding(paddingValues) // BottomSheetScaffold adds padding for peek height (0 here)
+                .padding(paddingValues)
         ) {
-            AsyncImage(
-                model = photo.imageUrl,
+            FlickerAsyncImage(
+                model = photo.photoUrl,
                 contentDescription = photo.title,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Fit,
+                loadingIndicatorSize = 64.dp
             )
 
             // Close Button
@@ -143,7 +143,8 @@ private fun ImageDetailScreenPreview() {
             photo = PhotoItem(
                 title = "Beautiful Sunset Over Mountains",
                 link = "https://example.com",
-                imageUrl = "https://picsum.photos/400/400",
+                thumbnailUrl = "https://picsum.photos/400/400",
+                photoUrl = "https://picsum.photos/800/800",
                 dateTaken = "2026-02-10T15:30:00Z",
                 author = "John Doe",
                 tags = listOf("sunset", "mountains", "nature")

@@ -18,7 +18,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 
 @Composable
@@ -35,11 +34,12 @@ fun PhotoItemCard(
         Box(
             modifier = Modifier.fillMaxSize()
         ) {
-            AsyncImage(
-                model = photo.imageUrl,
+            FlickerAsyncImage(
+                model = photo.thumbnailUrl,
                 contentDescription = photo.title,
                 modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                loadingIndicatorSize = 24.dp
             )
 
             Box(
@@ -76,7 +76,8 @@ private fun PhotoItemCardPreview() {
             photo = PhotoItem(
                 title = "Beautiful Sunset Over Mountains",
                 link = "https://example.com",
-                imageUrl = "https://picsum.photos/400/400",
+                thumbnailUrl = "https://picsum.photos/400/400",
+                photoUrl = "https://picsum.photos/800/800",
                 dateTaken = "2026-02-10T15:30:00Z",
                 author = "John Doe",
                 tags = listOf("sunset", "mountains", "nature")

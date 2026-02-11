@@ -41,16 +41,19 @@ internal class FeedViewModel(
             val tags = _state.value.tags.ifEmpty { null }
             val result = getFeedUseCase(tags)
 
-            _state.update {
-                if (result.isSuccess) {
-                    val feed = result.getOrNull()!!
+            if (result.isSuccess) {
+                val feed = result.getOrNull()!!
+                _state.update {
                     it.copy(
                         isLoading = false,
                         photos = feed.items,
                         error = null
                     )
-                } else {
-                    val errorMessage = result.exceptionOrNull()?.message ?: "Unknown error"
+                }
+            } else {
+                val errorMessage = result.exceptionOrNull()?.message ?: "Failed to load feed \uD83D\uDE2D"
+                _effect.send(FeedScreenEffect.ShowError(errorMessage))
+                _state.update {
                     it.copy(
                         isLoading = false,
                         error = errorMessage

@@ -1,5 +1,6 @@
 package cz.mokripat.flickerfetch.ui.feed
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.icons.Icons
@@ -12,12 +13,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
@@ -29,31 +32,25 @@ import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FeedScreen(
+internal fun FeedScreen(
     viewModel: FeedViewModel
 ) {
     val state by viewModel.state.collectAsState()
     var isSearchVisible by rememberSaveable { mutableStateOf(false) }
 
+    ProcessEffects(viewModel)
+
     Box(modifier = Modifier.fillMaxSize()) {
         Scaffold(
             modifier = Modifier.fillMaxSize(),
             topBar = {
-                TopAppBar(
-                    title = { Text(if (isSearchVisible) stringResource(R.string.feed_screen_title_search) else stringResource(R.string.feed_screen_title_feed)) },
-                    actions = {
-                        IconButton(onClick = {
-                            if (isSearchVisible) {
-                                viewModel.onClearTags()
-                            }
-                            isSearchVisible = !isSearchVisible
-                        }) {
-                            if (isSearchVisible) {
-                                Icon(Icons.Default.Close, contentDescription = stringResource(R.string.feed_screen_content_description_close_search))
-                            } else {
-                                Icon(Icons.Default.Search, contentDescription = stringResource(R.string.feed_screen_content_description_search))
-                            }
+                FeedTopAppBar(
+                    isSearchVisible = isSearchVisible,
+                    onSearchToggle = {
+                        if (isSearchVisible) {
+                            viewModel.onClearTags()
                         }
+                        isSearchVisible = !isSearchVisible
                     }
                 )
             }
@@ -78,4 +75,40 @@ fun FeedScreen(
             )
         }
     }
+}
+
+@Composable
+private fun ProcessEffects(
+    viewModel: FeedViewModel
+) {
+    val context = LocalContext.current
+    LaunchedEffect(Unit) {
+        viewModel.effect.collect { effect ->
+            when (effect) {
+                is FeedScreenEffect.ShowError -> {
+                    Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun FeedTopAppBar(
+    isSearchVisible: Boolean,
+    onSearchToggle: () -> Unit
+) {
+    TopAppBar(
+        title = { Text(if (isSearchVisible) stringResource(R.string.feed_screen_title_search) else stringResource(R.string.feed_screen_title_feed)) },
+        actions = {
+            IconButton(onClick = onSearchToggle) {
+                if (isSearchVisible) {
+                    Icon(Icons.Default.Close, contentDescription = stringResource(R.string.feed_screen_content_description_close_search))
+                } else {
+                    Icon(Icons.Default.Search, contentDescription = stringResource(R.string.feed_screen_content_description_search))
+                }
+            }
+        }
+    )
 }

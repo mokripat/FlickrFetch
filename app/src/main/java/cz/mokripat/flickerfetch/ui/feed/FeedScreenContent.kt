@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
 import cz.mokripat.flickerfetch.ui.feed.components.FeedSearchBar
@@ -79,15 +82,25 @@ internal fun FeedScreenContent(
         ) {
             when {
                 state.isLoading && state.photos.isEmpty() -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()),
+                        contentAlignment = Alignment.Center
+                    ) {
                         CircularProgressIndicator()
                     }
                 }
                 state.error != null -> {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState())
+                            .padding(vertical = dimensionResource(R.dimen.feed_screen_error_horizontal_spacing)),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Text(
                             text = stringResource(R.string.feed_screen_content_error_prefix, state.error),
-                            color = MaterialTheme.colorScheme.error
+                            color = MaterialTheme.colorScheme.error,
+                            textAlign = TextAlign.Center,
                         )
                     }
                 }

@@ -33,9 +33,15 @@ internal class FeedViewModel(
     /**
      * Loads the photo feed, optionally using the current tags.
      */
-    fun loadFeed() {
+    fun loadFeed(isPullRefresh: Boolean = false) {
         viewModelScope.launch {
-            _state.update { it.copy(isLoading = true, error = null) }
+            _state.update {
+                it.copy(
+                    isLoading = true,
+                    isPullRefreshing = isPullRefresh,
+                    error = null
+                )
+            }
 
             // Use current tags from state for search
             val tags = _state.value.tags.ifEmpty { null }
@@ -46,6 +52,7 @@ internal class FeedViewModel(
                 _state.update {
                     it.copy(
                         isLoading = false,
+                        isPullRefreshing = false,
                         photos = feed.items,
                         error = null
                     )
@@ -56,6 +63,7 @@ internal class FeedViewModel(
                 _state.update {
                     it.copy(
                         isLoading = false,
+                        isPullRefreshing = false,
                         error = errorMessage
                     )
                 }

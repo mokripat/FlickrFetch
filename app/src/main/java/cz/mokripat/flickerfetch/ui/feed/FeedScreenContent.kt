@@ -76,7 +76,7 @@ internal fun FeedScreenContent(
         }
 
         PullToRefreshBox(
-            isRefreshing = state.isLoading,
+            isRefreshing = state.isPullRefreshing,
             onRefresh = onRefresh,
             modifier = Modifier.fillMaxSize()
         ) {

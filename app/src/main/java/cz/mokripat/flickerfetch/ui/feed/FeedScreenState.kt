@@ -6,6 +6,7 @@ import cz.mokripat.flickerfetch.domain.model.PhotoItem
  * State of the FeedScreen.
  *
  * @property isLoading Whether the feed is currently loading.
+ * @property isPullRefreshing Whether the feed is currently refreshing via pull-to-refresh.
  * @property photos List of photos to display.
  * @property error Error message if any occurred.
  * @property selectedPhoto The currently selected photo for detail view.
@@ -14,6 +15,7 @@ import cz.mokripat.flickerfetch.domain.model.PhotoItem
  */
 internal data class FeedScreenState(
     val isLoading: Boolean = false,
+    val isPullRefreshing: Boolean = false,
     val photos: List<PhotoItem> = emptyList(),
     val error: String? = null,
     val selectedPhoto: PhotoItem? = null,

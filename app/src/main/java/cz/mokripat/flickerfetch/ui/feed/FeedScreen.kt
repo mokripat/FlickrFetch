@@ -59,7 +59,7 @@ internal fun FeedScreen(
                 state = state,
                 contentPaddingValues = innerPadding,
                 isSearchVisible = isSearchVisible,
-                onRefresh = { viewModel.loadFeed() },
+                onRefresh = { viewModel.loadFeed(isPullRefresh = true) },
                 onPhotoClick = { viewModel.selectPhoto(it) },
                 onSearchQueryChange = { viewModel.onSearchQueryChange(it) },
                 onAddTag = { viewModel.onAddTag() },

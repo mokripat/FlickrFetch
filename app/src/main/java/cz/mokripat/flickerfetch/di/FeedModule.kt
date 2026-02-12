@@ -5,6 +5,7 @@ import cz.mokripat.flickerfetch.domain.repository.FeedRepository
 import cz.mokripat.flickerfetch.domain.usecase.GetFeedUseCase
 import cz.mokripat.flickerfetch.domain.usecase.GetFeedUseCaseImpl
 import cz.mokripat.flickerfetch.ui.feed.FeedViewModel
+import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.dsl.viewModel
 import org.koin.dsl.module
 
@@ -12,7 +13,7 @@ import org.koin.dsl.module
  * DI module for Feed feature dependencies.
  */
 val feedModule = module {
-    single<FeedRepository> { FeedRepositoryImpl(get()) }
+    single<FeedRepository> { FeedRepositoryImpl(get(), Dispatchers.IO) }
 
     factory<GetFeedUseCase> { GetFeedUseCaseImpl(get()) }
 

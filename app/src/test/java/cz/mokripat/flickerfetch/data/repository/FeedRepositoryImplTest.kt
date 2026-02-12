@@ -7,6 +7,7 @@ import cz.mokripat.flickerfetch.data.api.dto.PublicFeedDto
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
@@ -21,7 +22,7 @@ class FeedRepositoryImplTest {
     @BeforeEach
     fun setUp() {
         api = mockk()
-        repository = FeedRepositoryImpl(api)
+        repository = FeedRepositoryImpl(api, StandardTestDispatcher())
     }
 
     @Test
@@ -54,7 +55,7 @@ class FeedRepositoryImplTest {
 
         // Assert
         assertTrue(result.isSuccess)
-        val feed = result.getOrNull()!!
+        val feed = result.getOrThrow()
         assertEquals("Feed Title", feed.title)
         assertEquals(1, feed.items.size)
 

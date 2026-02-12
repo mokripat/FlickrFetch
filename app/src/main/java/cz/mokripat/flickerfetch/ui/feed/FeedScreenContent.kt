@@ -37,7 +37,6 @@ import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
  *
  * @param state Current state of the screen.
  * @param contentPaddingValues Padding values from the scaffold.
- * @param isSearchVisible Whether the search bar is visible.
  * @param onRefresh Callback to refresh the feed.
  * @param onPhotoClick Callback when a photo is clicked.
  * @param onSearchQueryChange Callback when search query changes.
@@ -49,7 +48,6 @@ import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
 internal fun FeedScreenContent(
     state: FeedScreenState,
     contentPaddingValues: PaddingValues,
-    isSearchVisible: Boolean,
     onRefresh: () -> Unit,
     onPhotoClick: (PhotoItem) -> Unit,
     onSearchQueryChange: (String) -> Unit,
@@ -62,7 +60,7 @@ internal fun FeedScreenContent(
             .padding(top = contentPaddingValues.calculateTopPadding())
     ) {
         AnimatedVisibility(
-            visible = isSearchVisible,
+            visible = state.isSearchVisible,
             enter = expandVertically() + fadeIn(),
             exit = shrinkVertically() + fadeOut()
         ) {

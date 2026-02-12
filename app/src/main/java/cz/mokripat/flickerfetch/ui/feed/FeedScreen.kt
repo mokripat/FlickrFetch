@@ -16,9 +16,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -39,7 +36,6 @@ internal fun FeedScreen(
     viewModel: FeedViewModel
 ) {
     val state by viewModel.state.collectAsState()
-    var isSearchVisible by rememberSaveable { mutableStateOf(false) }
 
     ProcessEffects(viewModel)
 
@@ -48,20 +44,14 @@ internal fun FeedScreen(
             modifier = Modifier.fillMaxSize(),
             topBar = {
                 FeedTopAppBar(
-                    isSearchVisible = isSearchVisible,
-                    onSearchToggle = {
-                        if (isSearchVisible) {
-                            viewModel.onClearTags()
-                        }
-                        isSearchVisible = !isSearchVisible
-                    }
+                    isSearchVisible = state.isSearchVisible,
+                    onSearchToggle = { viewModel.onToggleSearch() }
                 )
             }
         ) { innerPadding ->
             FeedScreenContent(
                 state = state,
                 contentPaddingValues = innerPadding,
-                isSearchVisible = isSearchVisible,
                 onRefresh = { viewModel.loadFeed(isPullRefresh = true) },
                 onPhotoClick = { viewModel.selectPhoto(it) },
                 onSearchQueryChange = { viewModel.onSearchQueryChange(it) },

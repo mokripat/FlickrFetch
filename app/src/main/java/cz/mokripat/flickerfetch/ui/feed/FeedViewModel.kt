@@ -137,7 +137,21 @@ internal class FeedViewModel(
     }
 
     /**
+     * Toggles the visibility of the search bar.
+     * If closing, also clears tags.
+     */
+    fun onToggleSearch() {
+        val isCurrentlySearchVisible = _state.value.isSearchVisible
+        if (isCurrentlySearchVisible) {
+            onClearTags()
+        }
+        _state.update { it.copy(isSearchVisible = !isCurrentlySearchVisible) }
+    }
+
+    /**
      * Clears all tags and the search query, then reloads the feed.
+     *
+     * If there are no tags, it does nothing to avoid unwanted reload.
      */
     fun onClearTags() {
         if (_state.value.tags.isEmpty()) {

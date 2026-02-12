@@ -48,7 +48,6 @@ internal class FeedViewModel(
                 it.copy(
                     isLoading = true,
                     isPullRefreshing = isPullRefresh,
-                    error = null
                 )
             }
 
@@ -71,6 +70,7 @@ internal class FeedViewModel(
                 _effect.send(FeedScreenEffect.ShowError(errorMessage))
                 _state.update {
                     it.copy(
+                        photos = emptyList(),
                         isLoading = false,
                         isPullRefreshing = false,
                         error = errorMessage

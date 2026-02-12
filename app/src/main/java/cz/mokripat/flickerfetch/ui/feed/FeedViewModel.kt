@@ -57,7 +57,7 @@ internal class FeedViewModel(
             val result = getFeedUseCase(tags)
 
             if (result.isSuccess) {
-                val feed = result.getOrNull()!!
+                val feed = result.getOrThrow()
                 _state.update {
                     it.copy(
                         isLoading = false,

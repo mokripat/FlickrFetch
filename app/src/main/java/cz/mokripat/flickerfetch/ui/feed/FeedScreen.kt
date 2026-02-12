@@ -19,9 +19,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.ui.feed.components.ImageFullscreenDetail
 
@@ -99,7 +99,7 @@ private fun FeedTopAppBar(
                     if (isSearchVisible) R.drawable.ic_search_title else R.drawable.ic_feed_title
                 ),
                 tint = Color.Unspecified,
-                modifier = Modifier.height(24.dp),
+                modifier = Modifier.height(dimensionResource(R.dimen.feed_screen_title_height)),
                 contentDescription = null
             )
         },

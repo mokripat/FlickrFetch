@@ -6,6 +6,8 @@
 
     <dimen name="feed_async_image_loading_indicator_size">48dp</dimen>
 
+    <dimen name="feed_screen_title_height">24dp</dimen>
+
     <dimen name="feed_search_bar_horizontal_padding">16dp</dimen>
     <dimen name="feed_search_bar_bottom_padding">8dp</dimen>
     <dimen name="feed_search_bar_tags_top_padding">8dp</dimen>

@@ -154,7 +154,8 @@ private fun ImageDetailScreenPreview() {
                 link = "https://example.com",
                 thumbnailUrl = "https://picsum.photos/400/400",
                 photoUrl = "https://picsum.photos/800/800",
-                dateTaken = "2026-02-10T15:30:00Z",
+                dateString = "2026-02-10T15:30:00Z",
+                dateTaken = "2026 02 10 15:30:00",
                 author = "John Doe",
                 tags = listOf("sunset", "mountains", "nature")
             ),

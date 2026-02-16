@@ -1,11 +1,17 @@
 package cz.mokripat.flickerfetch.ui.feed.sheet
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,7 +20,9 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import cz.mokripat.flickerfetch.R
+import cz.mokripat.flickerfetch.common.IntentUtils
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
+import cz.mokripat.flickerfetch.ui.feed.utils.FeedPhotoUtils
 
 /**
  * Content for the bottom sheet displaying photo details.
@@ -33,12 +41,31 @@ internal fun ImageInfoContent(
             .navigationBarsPadding()
     ) {
         val title = photo.title.ifBlank { stringResource(R.string.image_info_sheet_no_title) }
-        Text(
-            text = title,
-            style = MaterialTheme.typography.headlineSmall,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.fillMaxWidth()
-        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.headlineSmall,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            IconButton(
+                onClick = {
+                    FeedPhotoUtils.sharePhoto(photo.title)
+                }
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Share,
+                    contentDescription = "Share",
+                )
+            }
+        }
+
+
 
         Spacer(modifier = Modifier.height(dimensionResource(R.dimen.image_info_sheet_spacer_height_large)))
 

@@ -8,6 +8,7 @@ package cz.mokripat.flickerfetch.domain.model
  * @property thumbnailUrl URL of the thumbnail image (Small).
  * @property photoUrl URL of the full-size image (Large).
  * @property dateTaken Date and time when the photo was taken.
+ * @property dateString Original date string from the API, useful for debugging or display.
  * @property author Author of the photo.
  * @property tags List of tags associated with the photo.
  */
@@ -17,6 +18,7 @@ data class PhotoItem(
     val thumbnailUrl: String,
     val photoUrl: String,
     val dateTaken: String,
+    val dateString: String,
     val author: String,
     val tags: List<String>
 )

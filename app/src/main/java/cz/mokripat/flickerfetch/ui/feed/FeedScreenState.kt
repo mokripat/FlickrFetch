@@ -1,6 +1,8 @@
 package cz.mokripat.flickerfetch.ui.feed
 
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
+import cz.mokripat.flickerfetch.domain.model.SortStrategy
+import cz.mokripat.flickerfetch.domain.model.TagMode
 
 /**
  * State of the FeedScreen.
@@ -22,5 +24,7 @@ internal data class FeedScreenState(
     val selectedPhoto: PhotoItem? = null,
     val isSearchVisible: Boolean = false,
     val searchQuery: String = "",
-    val tags: List<String> = emptyList()
+    val tags: List<String> = emptyList(),
+    val sortStrategy: SortStrategy = SortStrategy.DEFAULT,
+    val tagMode: TagMode = TagMode.ALL,
 )

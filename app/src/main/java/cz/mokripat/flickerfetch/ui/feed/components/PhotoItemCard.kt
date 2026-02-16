@@ -68,7 +68,7 @@ internal fun PhotoItemCard(
                     style = MaterialTheme.typography.bodyMedium,
                     color = Color.White,
                     maxLines = 2,
-                    overflow = TextOverflow.Ellipsis
+                    overflow = TextOverflow.Ellipsis,
                 )
             }
         }
@@ -86,6 +86,7 @@ private fun PhotoItemCardPreview() {
                 thumbnailUrl = "https://picsum.photos/400/400",
                 photoUrl = "https://picsum.photos/800/800",
                 dateTaken = "2026-02-10T15:30:00Z",
+                dateString = "2026-02-10T15:30:00Z",
                 author = "John Doe",
                 tags = listOf("sunset", "mountains", "nature")
             ),

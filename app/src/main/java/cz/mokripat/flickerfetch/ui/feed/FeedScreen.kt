@@ -56,7 +56,9 @@ internal fun FeedScreen(
                 onPhotoClick = { viewModel.selectPhoto(it) },
                 onSearchQueryChange = { viewModel.onSearchQueryChange(it) },
                 onAddTag = { viewModel.onAddTag() },
-                onRemoveTag = { viewModel.onRemoveTag(it) }
+                onRemoveTag = { viewModel.onRemoveTag(it) },
+                onStrategyChange = { viewModel.onSwitchSortingStrategy() },
+                onTagModeChange = { viewModel.onSwitchTagMode() }
             )
         }
 

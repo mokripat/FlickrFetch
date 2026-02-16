@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -19,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -29,6 +31,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import cz.mokripat.flickerfetch.R
 import cz.mokripat.flickerfetch.domain.model.PhotoItem
+import cz.mokripat.flickerfetch.domain.model.SortStrategy
+import cz.mokripat.flickerfetch.domain.model.TagMode
 import cz.mokripat.flickerfetch.ui.feed.components.FeedSearchBar
 import cz.mokripat.flickerfetch.ui.feed.components.PhotoItemCard
 
@@ -53,6 +57,8 @@ internal fun FeedScreenContent(
     onSearchQueryChange: (String) -> Unit,
     onAddTag: () -> Unit,
     onRemoveTag: (String) -> Unit,
+    onStrategyChange: () -> Unit,
+    onTagModeChange: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -72,6 +78,29 @@ internal fun FeedScreenContent(
                 onRemoveTag = onRemoveTag
             )
         }
+
+        Row {
+            Text("Sort by date")
+
+            Switch(
+                checked = state.sortStrategy == SortStrategy.BY_DATE,
+                onCheckedChange = { isChecked ->
+                    onStrategyChange()
+                },
+            )
+        }
+
+        Row {
+            Text("Needs only one tag to match")
+
+            Switch(
+                checked = state.tagMode == TagMode.ANY,
+                onCheckedChange = { isChecked ->
+                    onTagModeChange()
+                },
+            )
+        }
+
 
         PullToRefreshBox(
             isRefreshing = state.isPullRefreshing,

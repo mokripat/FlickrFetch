@@ -27,6 +27,7 @@ private fun PhotoItemDto.toDomain(): PhotoItem {
         thumbnailUrl = media.m,
         photoUrl = media.m.replace("_m.", "_b."),
         dateTaken = DateFormatUtils.formatDate(dateTaken),
+        dateString = dateTaken,
         author = author.extractAuthorName(),
         tags = tags.split(" ").filter { it.isNotBlank() }
     )
